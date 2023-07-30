@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nada</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #500000; /* Fundo vermelho escuro */
+            color: #fff; /* Texto branco */
+        }
+        #heartContainer {
+            position: relative;
+            text-align: center;
+        }
+        #heartCanvas {
+            display: block;
+            margin: 0 auto; /* Centraliza o coração horizontalmente */
+            margin-bottom: 10px; /* Afasta o coração 10 pixels do texto */
+            max-width: 100%; /* Define a largura máxima para evitar que o coração fique muito grande em dispositivos maiores */
+        }
+        #message {
+            font-size: 18px;
+            max-width: 500px;
+            padding: 10px; /* Adiciona um espaçamento interno para melhorar a legibilidade */
+            box-sizing: border-box; /* Garante que o espaçamento interno não afete o dimensionamento do elemento */
+        }
+
+        /* Media Query para dispositivos com largura menor ou igual a 768 pixels (exemplo: tablets e smartphones) */
+        @media (max-width: 768px) {
+            #message {
+                font-size: 16px; /* Reduz o tamanho da fonte para dispositivos menores */
+                max-width: 90%; /* Reduz a largura máxima para que o texto não fique muito longo em dispositivos menores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="heartContainer">
+        <canvas id="heartCanvas" width="100" height="100"></canvas>
+        <div id="message">
+            Olá Clara !!! Não sou muito bom com as palavras e não achei bom mandar essa mensagem no WhatsApp , 
+            mas gostaria de deixar essa mensagem para você. Só não repare no desenho porque eu não sei muito como ajeitar ele e sei que você merece mais.
+            Então você é uma pessoa incrível e a cada dia eu tenho tido mais admiração, és uma pessoa linda em todos os aspectos. 
+            Agradeço a Deus por ter te colocado em minha vida, gosto muito de ti e gostaria de deixar essa mensagem.
+        </div>
+    </div>
+
+    <script>
+        // Função para desenhar um coração no canvas usando curvas cúbicas Bézier
+        function drawHeart() {
+            const canvas = document.getElementById('heartCanvas');
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const size = 50; // Tamanho do coração reduzido
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            ctx.beginPath();
+            ctx.moveTo(centerX, centerY + size / 4);
+            ctx.bezierCurveTo(
+                centerX + size / 2, centerY - size,
+                centerX + size, centerY + size / 4,
+                centerX, centerY + size
+            );
+            ctx.bezierCurveTo(
+                centerX - size, centerY + size / 4,
+                centerX - size / 2, centerY - size,
+                centerX, centerY + size / 4
+            );
+            ctx.fillStyle = 'red';
+            ctx.fill();
+            ctx.closePath();
+        }
+
+        // Ao carregar a página, desenhar o coração e exibir a mensagem
+        window.onload = function() {
+            drawHeart();
+        };
+    </script>
+</body>
+</html>
